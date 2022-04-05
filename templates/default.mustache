@@ -126,6 +126,9 @@ function base16-{{scheme-slug}} -d "{{scheme-name}}"
   # remember current theme
   set -U base16_theme {{scheme-slug}}
 
+  # update vim theme
+  echo -e "if !exists('g:colors_name') || g:colors_name != 'base16-$base16_theme'\n  colorscheme base16-$base16_theme\nendif" >  ~/.vimrc_background
+
   # clean up
   functions -e put_template put_template_var put_template_custom
 end
