@@ -28,13 +28,7 @@ function base16-{{scheme-slug}} -d "{{scheme-name}}"
   set colorfg $color07 # Base 05 - White
   set colorbg $color00 # Base 00 - Black
 
-  if test -n "$TMUX"
-    # Tell tmux to pass the escape sequences through
-    # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
-    function put_template; printf '\033Ptmux;\033\033]4;%d;rgb:%s\033\033\\\033\\' $argv; end;
-    function put_template_var; printf '\033Ptmux;\033\033]%d;rgb:%s\033\033\\\033\\' $argv; end;
-    function put_template_custom; printf '\033Ptmux;\033\033]%s%s\033\033\\\033\\' $argv; end;
-  else if string match 'screen*' $TERM # [ "${TERM%%[-.]*}" = "screen" ]
+  if string match 'screen*' $TERM # [ "${TERM%%[-.]*}" = "screen" ]
     # GNU screen (screen, screen-256color, screen-256color-bce)
     function put_template; printf '\033P\033]4;%d;rgb:%s\007\033\\' $argv; end;
     function put_template_var; printf '\033P\033]%d;rgb:%s\007\033\\' $argv; end;
